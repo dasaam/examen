@@ -5,6 +5,33 @@ $('#productsTable').DataTable({
 
 removeLoader()
 
+function sendProductForm(idFormulario){
+    let formularioValido = false;
+
+    const name = document.getElementById('name');
+    const price = document.getElementById('price');
+    const quantity = document.getElementById('quantity');
+    
+    
+    if(name.value.trim() != "" && price.value != "" && quantity.value != ""){
+        formularioValido = true;
+    }
+    
+    if (formularioValido == false) {
+        Swal.fire("Advertencia", "Los campos con * son obligatorios, favor de llenarlos.", "warning");
+        updateValidState(name);
+        updateValidState(price);
+        updateValidState(quantity);
+
+        removeLoader();
+        return false;
+    } 
+
+    const form = document.getElementById(idFormulario);
+
+    form.submit()
+}
+
 
 function updateValidState(field){
     if(field.value.trim() != ""){

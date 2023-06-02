@@ -67,4 +67,21 @@ class ProductModel {
         return $productos;
     }
 
+    public function addProduct($product) {
+        try {
+            $sql = "INSERT INTO products (name, price, quantity) VALUES (:name, :price, :quantity)";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindValue(':name', $product->getName());
+            $stmt->bindValue(':price', $product->getPrice());
+            $stmt->bindValue(':quantity', $product->getQuantity());
+            $stmt->execute();
+
+            $product->setId($this->conexion->lastInsertId());
+            
+            return $product;
+        } catch (PDOException $e) {
+            return null;
+        }
+    }
+
 }

@@ -6,7 +6,7 @@
 
 <main class="container" id="mainContainer">
 	<div class="d-flex justify-content-center my-4">
-		<a href="#" class="btn btn-outline-info">
+		<a href="index.php?action=<?php echo base64_encode("add") ?>" class="btn btn-outline-info">
 			Agregar
 		</a>
 	</div>

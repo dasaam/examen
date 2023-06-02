@@ -11,4 +11,8 @@ class ProductController {
         return $this->productModel->getProducts();
     }
 
+    public function addProduct($product) {
+        return $this->productModel->addProduct($product);
+    }
+
 }
