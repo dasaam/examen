@@ -32,6 +32,43 @@ function sendProductForm(idFormulario){
     form.submit()
 }
 
+function deleteProduct(action, id){
+    
+    Swal.fire({
+        title: '¿Esta seguro de eliminar?',
+        showCancelButton: true,
+        confirmButtonText: 'Eliminar',
+      }).then((result) => {
+        if (result.isConfirmed) {
+            showLoader()
+            const url = `index.php?action=${action}&id=${id}`;
+
+            fetch(url, {
+                method: 'POST'
+            })
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                console.log(data)
+                if(data.code == '1'){
+                    window.location.href = data.response;
+                    
+                }else{
+                    Swal.fire("Advertencia", data.message, "warning");
+                }
+                
+                removeLoader();
+            })
+            .catch(function(err) {
+                Swal.fire("Error", `Error, en el servidor ${err}`, "error");
+                removeLoader();
+            });
+        }else{
+			removeLoader();
+		}
+    })
+}
 
 function updateValidState(field){
     if(field.value.trim() != ""){

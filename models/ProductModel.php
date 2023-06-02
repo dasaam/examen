@@ -115,4 +115,17 @@ class ProductModel {
         }
     }
 
+    public function deleteProduct($id) {
+        try {
+            $sql = "DELETE FROM products WHERE id_product = :id";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindValue(':id', $id);
+            $stmt->execute();
+
+            return 1;
+        } catch (PDOException $e) {
+            return null;
+        }
+    }
+
 }

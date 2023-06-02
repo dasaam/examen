@@ -22,4 +22,8 @@ class ProductController {
     public function updateProduct($product) {
         return $this->productModel->updateProduct($product);
     }
+
+    public function deleteProduct($id) {
+        return $this->productModel->deleteProduct($id);
+    }
 }

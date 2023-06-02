@@ -98,9 +98,24 @@ if (isset($_GET['action'])) {
 		break;
 
 		case 'delete':
+			$id = base64_decode($_GET['id']);
+			$product = $productController->getProductById($id);
 
+			if ($product) {
+				$response = $productController->deleteProduct($id);
+
+				$code = 1;
+				$message = "Guardado";
+
+				if ($response == null) {
+					$code = 0;
+					$message = "Ocurrio un error";
+				}
+
+				echo json_encode(array('code' => $code, 'message' => $message, 'response' => 'index.php'));
+			}
 			
-			break;
+		break;
 
 		default:
 			$message = 'Acción desconocida.';

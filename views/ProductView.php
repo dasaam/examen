@@ -28,7 +28,7 @@
 					<td><?php echo $product->getQuantity(); ?></td>
 					<td>
 						<a href="index.php?action=<?php echo base64_encode("update") ?>&id=<?php echo base64_encode($product->getId()); ?>">Editar</a> |
-						<a href="#">Eliminar</a>
+						<a href="javascript:void(0)" onclick="deleteProduct('<?php echo base64_encode('delete') ?>','<?php echo base64_encode($product->getId()); ?>')">Eliminar</a>
 
 					</td>
 				</tr>
