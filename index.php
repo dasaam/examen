@@ -21,18 +21,28 @@ if (isset($_GET['action'])) {
 				$price = htmlspecialchars($_POST['price']);
 				$quantity = htmlspecialchars($_POST['quantity']);
 
-				$newProduct = new Product($name, $price, $quantity);
-				$product = $productController->addProduct($newProduct);
+				if($name !== "" && $price !== "" && $quantity !== ""){
+					$newProduct = new Product($name, $price, $quantity);
+					$product = $productController->addProduct($newProduct);
 
-				if ($product != null) {
-					header('Location: index.php');
-				} else {
-					$message = 'Ocurrio un error al guardar';
+					if ($product != null) {
+						header('Location: index.php');
+					} else {
+						$message = 'Ocurrio un error al guardar';
+
+						include './views/includes/Head.php';
+						include './views/ProductNotificationView.php';
+						include './views/includes/Footer.php';
+					}
+				}else{
+					$message = 'Todos los campos son obligatorios';
 
 					include './views/includes/Head.php';
 					include './views/ProductNotificationView.php';
 					include './views/includes/Footer.php';
 				}
+
+				
 			} else {
 				$product = new Product(null, null, null);
 				$product->setId(null);
@@ -60,17 +70,26 @@ if (isset($_GET['action'])) {
 						$price = htmlspecialchars($_POST['price']);
 						$quantity = htmlspecialchars($_POST['quantity']);
 
-						$product->setName($name);
-						$product->setPrice($price);
-						$product->setQuantity($quantity);
+						if($name !== "" && $price !== "" && $quantity !== ""){
 
-						$product = $productController->updateProduct($product);
+							$product->setName($name);
+							$product->setPrice($price);
+							$product->setQuantity($quantity);
 
-						if ($product != null) {
-							header('Location: index.php');
-						} else {
-							$message = 'Ocurrio un error al guardar';
+							$product = $productController->updateProduct($product);
 
+							if ($product != null) {
+								header('Location: index.php');
+							} else {
+								$message = 'Ocurrio un error al guardar';
+
+								include './views/includes/Head.php';
+								include './views/ProductNotificationView.php';
+								include './views/includes/Footer.php';
+							}
+						}else{
+							$message = 'Todos los campos son obligatorios';
+		
 							include './views/includes/Head.php';
 							include './views/ProductNotificationView.php';
 							include './views/includes/Footer.php';
