@@ -84,4 +84,35 @@ class ProductModel {
         }
     }
 
+    public function getProductById($id) {
+        $sql = "SELECT * FROM products WHERE id_product = :id";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($row) {
+            $product = new Product($row['name'], $row['price'], $row['quantity']);
+            $product->setId($row['id_product']);
+            return $product;
+        } else {
+            return null;
+        }
+    }
+
+    public function updateProduct($product) {
+        try {
+            $sql = "UPDATE products SET name = :name, price = :price, quantity = :quantity WHERE id_product = :id";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindParam(':name', $product->getName());
+            $stmt->bindParam(':price', $product->getPrice());
+            $stmt->bindParam(':quantity', $product->getQuantity());
+            $stmt->bindParam(':id', $product->getId());
+            $stmt->execute();
+            return $product;
+        } catch (PDOException $e) {
+            return null;
+        }
+    }
+
 }

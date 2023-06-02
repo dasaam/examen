@@ -14,5 +14,12 @@ class ProductController {
     public function addProduct($product) {
         return $this->productModel->addProduct($product);
     }
+    
+    public function getProductById($id) {
+        return $this->productModel->getProductById($id);
+    }
 
+    public function updateProduct($product) {
+        return $this->productModel->updateProduct($product);
+    }
 }

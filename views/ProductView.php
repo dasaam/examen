@@ -27,7 +27,7 @@
 					<td><?php echo $product->getPrice(); ?></td>
 					<td><?php echo $product->getQuantity(); ?></td>
 					<td>
-						<a href="#">Editar</a> |
+						<a href="index.php?action=<?php echo base64_encode("update") ?>&id=<?php echo base64_encode($product->getId()); ?>">Editar</a> |
 						<a href="#">Eliminar</a>
 
 					</td>
